@@ -1,0 +1,91 @@
+									ADDRESSBOOKSERVICE-DATABASE
+								--------------------------------------
+
+UC1:	Query to creating DataBase
+-----------------------------------
+>CREATE DATABASE AddressBookServiceDB
+>SHOW DATABASES
+>USE AddressBookServiceDB
+
+UC2: Query to Create Table and InsertRecords
+--------------------------------------------
+>CREATE TABLE AddressBookTable 
+	(
+	firstName VARCHAR(150),	
+	lastName VARCHAR(150),
+	address  varchar(150),
+	city varchar(100),
+	state char(50),
+	zip SMALLINT(6),
+	phoneNumber INT(10),
+	Email varchar(20)
+);
+
+UC3: Query to Add details into the table
+----------------------------------------
+>INSERT INTO addressbooktable(firstName,lastName,address,city,state,zip,phoneNumber,Email)
+>VALUES
+>('sai','tarun','pelluru','ongole','AP',523,846404,'sai800@gmail.com'),
+>('sravani','lakshmi','ongole','ongole','Ap',530,7877878,'sravs@gm.in');
+>select * from addressbooktable
+
+UC4: query to edit existing contact detailsn in the tabl
+-----------------------------------------------------------
+/** directly our workbench not supports for update and delete:-->
+(https://stackoverflow.com/questions/11448068/mysql-error-code-1175-during-update-in-mysql-workbench#:~:text=Error%20Code%3A%201175.,%2D%3E%20SQL%20Editor%20and%20reconnect.&text=If%20you%20are%20in%20a,something%20like%20this%20should%20work!)
+SET SQL_SAFE_UPDATES=0;
+UPDATE tablename SET columnname=1;
+SET SQL_SAFE_UPDATES=1;
+**/
+
+>SET SQL_SAFE_UPDATES=0; 
+>UPDATE addressbooktable SET  address='mm-road' where firstName='sravani';
+
+>select * from addressbooktable;
+
+UC5:query to delete a record based on the firstname
+-----------------------------------------------------
+/* adding record */
+	>INSERT INTO addressbooktable
+	>values('aksha','sai','Hyd','Hyd','TN',320,85246,'shjja@in');
+	>select * FROM addressbooktable;
+/* deleting record based on name */
+ 	>DELETE from addressbooktable where firstname='aksha';
+
+UC6:- Query to retrive the data based on city or state
+-----------------------------------------------------------
+>SELECT *FROM addressbooktable WHERE city='Hyd' OR state='TN';
+>SELECT * FROM addressbooktable; 
+
+UC7: Query to count the persons based on city or state
+------------------------------------------------------------
+>SELECT count(firstName) FROM addressbooktable WHERE city='ongole';
+ >SELECT count(firstName) FROM addressbooktable WHERE state='TN';
+
+UC8:query to identify sorted alphabetically by city
+-------------------------------------------------------
+>SELECT * FROM addressbooktable ORDER BY city ASC; 
+
+UC9:-Query to add type and update
+--------------------------------------
+>ALTER TABLE addressbooktable ADD type VARCHAR(150); 
+>UPDATE addressbooktable SET type='family' WHERE firstName='sravani';
+>UPDATE addressbooktable SET type='friends' WHERE firstName='aksha' ;
+>UPDATE addressbooktable SET type='profession' WHERE firstName='sai';
+>UPDATE addressbooktable SET type='wife' WHERE firstName='puppy';
+
+UC10:-Query to find cound based on type
+-------------------------------------------------
+>SELECT count(firstName) FROM addressbooktable WHERE type='profession';
+>SELECT count(firstName) FROM addressbooktable WHERE type='friends';
+
+UC11:- Query to add same person to another type
+-------------------------------------------------
+>SELECT * from addressbooktable;
+>INSERT INTO addressbooktable(firstName,lastName,address,city,state,zip,phoneNumber,Email,type)
+	values('aksha','sai','srnagar','Hyd','TN',320,8585856,'pqrsa@in','family');
+ 
+	
+    
+
+
